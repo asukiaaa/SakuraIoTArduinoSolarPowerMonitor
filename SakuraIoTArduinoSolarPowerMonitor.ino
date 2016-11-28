@@ -17,11 +17,11 @@ void setup() {
   Serial.println("start");
   pinMode(LED_PIN, OUTPUT);
   chargeController.begin();
-  for(;;){
-    if( (sakuraio.getConnectionStatus() & 0x80) == 0x80 ) break;
-    Serial.print(".");
-    delay(1000);
-  }
+  //for(;;){
+  //  if( (sakuraio.getConnectionStatus() & 0x80) == 0x80 ) break;
+  //  Serial.print(".");
+  //  delay(1000);
+  //}
   Serial.println("finished setup");
 }
 
@@ -36,8 +36,13 @@ void loop() {
     sumChargeAmpere += chargeController.chargeAmpere;
     sumCount ++;
   }
+  //sumPanelVoltage += 30;
+  //sumBatteryVoltage += 22;
+  //sumChargeAmpere += 1.25;
+  //sumCount ++;
 
   if (sumCount >= 6) {
+    Serial.println("send to sakura");
     float panelVoltage = sumPanelVoltage / sumCount;
     float batteryVoltage = sumBatteryVoltage / sumCount;
     float chargeAmpere = sumChargeAmpere / sumCount;
