@@ -48,7 +48,7 @@ void loop() {
     float chargeAmpere = sumChargeAmpere / sumCount;
     float chargeWatt = batteryVoltage * chargeAmpere;
 
-    sakuraioSendChargeInfo(panelVoltage, batteryVoltage, chargeAmpere, chargeWatt);
+    sakuraioSendSolarPowerInfo(panelVoltage, batteryVoltage, chargeAmpere, chargeWatt);
 
     sumPanelVoltage = 0;
     sumBatteryVoltage = 0;
@@ -59,7 +59,7 @@ void loop() {
   delay(10000);
 }
 
-void sakuraioSendChargeInfo(float panelVoltage, float batteryVoltage, float chargeAmpere, float chargeWatt) {
+void sakuraioSendSolarPowerInfo(float panelVoltage, float batteryVoltage, float chargeAmpere, float chargeWatt) {
   // Tx Queue
   sakuraio.enqueueTx((uint8_t)0, (float) panelVoltage);
   sakuraio.enqueueTx((uint8_t)1, (float) chargeAmpere);
